@@ -6,8 +6,9 @@
   <thead>
     <tr>
       <th>Youtube ID</th>
-      <th>View</th>
-      <th>Channel subscribers</th>
+      <!-- <th>Views</th>
+      <th>Channel Subscribers</th> -->
+      <th>Title</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,11 +16,11 @@
   <tbody>
     <% @videos.each do |video| %>
       <tr>
-        <td><%= video.youtube_id %></td>
-        <td><%= video.view %></td>
-        <td><%= video.channel_subscribers %></td>
-        <td><%= link_to 'Show', video %></td>
-        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to video.youtube_id, video %></td>
+        <!-- <td><%= video.views %></td>
+        <td><%= video.channel_subscribers %></td> -->
+        <td><%= video.title %></td>
+        <!-- <td><%= link_to 'Edit', edit_video_path(video) %></td> -->
         <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -28,4 +29,4 @@
 
 <br>
 
-<%= link_to 'Get Video Stats', new_video_path %>
+<%= link_to 'Add A Video', new_video_path %>

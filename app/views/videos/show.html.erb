@@ -1,18 +1,27 @@
 <p id="notice"><%= notice %></p>
 
+<h1>
+  <%= @video.title %>
+</h1>
+
 <p>
-  <strong>Youtube:</strong>
+  <strong>Youtube ID:</strong>
   <%= @video.youtube_id %>
 </p>
 
-<p>
-  <strong>View:</strong>
-  <%= @video.view %>
+<!-- <p>
+  <strong>Views:</strong>
+  <%= @video.views%>
 </p>
 
 <p>
   <strong>Channel subscribers:</strong>
   <%= @video.channel_subscribers %>
+</p> -->
+
+<p>
+  <strong>YouTube URL:</strong>
+  <%= link_to "https://www.youtube.com/watch?v=#{@video.youtube_id}", "https://www.youtube.com/watch?v=#{@video.youtube_id}" %>
 </p>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |

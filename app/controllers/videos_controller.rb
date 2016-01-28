@@ -27,17 +27,26 @@ class VideosController < ApplicationController
     @video = Video.new(video_params)
 
 
+    # TODO create a class or helper for this
+    # Get View Count and Channel ID
     response = RestClient.get("https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=#{@video.youtube_id}&key=#{ENV["GOOGLE_API_KEY"]}")
     response = JSON.parse(response.body)
 
     statistics = response["items"][0]["statistics"]
     snippet    = response["items"][0]["snippet"]
 
+    title      = snippet["title"]
     view_count = statistics["viewCount"]
     channel_id = snippet["channelId"]
 
-    
-    binding.pry
+    # Get Subscriber Count
+    response = RestClient.get("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=#{channel_id}&key=#{ENV["GOOGLE_API_KEY"]}")
+    response = JSON.parse(response.body)
+
+    statistics = response["items"][0]["statistics"]
+    subscribers = statistics["subscriberCount"]
+
+    @video.update_attributes views: view_count, channel_subscribers: subscribers, title: title
 
     respond_to do |format|
       if @video.save
@@ -82,6 +91,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:youtube_id, :view, :channel_subscribers)
+      params.require(:video).permit(:youtube_id, :views, :channel_subscribers, :title)
     end
 end
