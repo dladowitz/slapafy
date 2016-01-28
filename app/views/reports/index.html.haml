@@ -7,7 +7,7 @@
   %thead
     %tr
       %th Report Number
-      %th Created At
+      %th Created On
       %th View Report
       %th Download
       %th Rows
@@ -16,7 +16,7 @@
     - @reports.each do |report|
       %tr
         %td= report.id
-        %td= report.created_at.localtime.to_formatted_s(:long)
+        %td= report.created_at.strftime("%D")
         %td= link_to "View Report", report
         %td= link_to "Download as CSV", "/reports/#{report.id}.csv"
         %td= report.stats.count
