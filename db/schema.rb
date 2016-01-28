@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128051656) do
+ActiveRecord::Schema.define(version: 20160128054114) do
+
+  create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "videos", force: :cascade do |t|
     t.string   "youtube_id"

@@ -1,0 +1,20 @@
+%h1 Reports
+%table.table
+  %thead
+    %tr
+      %th Report Number
+      %th created_at
+      %th View Report
+      %th Download
+  %tbody
+    - @reports.each do |report|
+      %tr
+        %td= report.id
+        %td= report.created_at.localtime.to_formatted_s(:long)
+        %td= link_to "View", report
+        %td= link_to "Download Report", "#"
+
+= button_to "Generate New Report", reports_path, method: :post, class: "btn btn-success"
+
+%h2.m-t-3 Videos
+= link_to "View Current Videos", videos_path, class: "btn btn-primary"
