@@ -1,12 +1,15 @@
 %h1= "Report ##{@report.id}"
-%h3= @report.created_at.localtime.to_formatted_s(:long)
+%p= @report.created_at.localtime.to_formatted_s(:long)
+%td.col-sm-4= link_to "Download as CSV", "/reports/#{@report.id}.csv", class: "btn btn-info"
 
-%table.table
+
+%table.table.m-t-2
   %thead
     %tr
       %th YouTube ID
       %th Views
       %th Channel Subscribers
+
       %th Video Title
   %tbody
     - @report.stats.each do |stat|
@@ -15,4 +18,3 @@
         %td= stat.views
         %td= stat.channel_subscribers
         %td= stat.video.title
-        

@@ -2,6 +2,7 @@
 
 = button_to "Generate New Report", reports_path, method: :post, class: "btn btn-success m-y-1"
 
+
 %table.table
   %thead
     %tr
@@ -16,8 +17,8 @@
       %tr
         %td= report.id
         %td= report.created_at.localtime.to_formatted_s(:long)
-        %td= link_to "View", report
-        %td= link_to "Download Report", "#"
+        %td= link_to "View Report", report
+        %td= link_to "Download as CSV", "/reports/#{report.id}.csv"
         %td= report.stats.count
         %td= button_to "Delete Report", report_path(report), method: :delete, class: "btn btn-sm btn-danger", :data => { :confirm => 'Are you like really really sure?' }
 

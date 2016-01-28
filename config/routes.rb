@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root to: "reports#index"
+  root to: "welcome#landing"
 
+  resources :welcome, only: [:landing]
   resources :reports
   resources :videos
   # The priority is based upon order of creation: first created -> highest priority.

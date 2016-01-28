@@ -3,6 +3,11 @@ class ReportsController < ApplicationController
 
   def index
     @reports = Report.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @reports.to_csv, filename: "slapafy_all_reports.csv" }
+    end
   end
 
   def create
@@ -15,7 +20,10 @@ class ReportsController < ApplicationController
   end
 
   def show
-
+    respond_to do |format|
+      format.html
+      format.csv { send_data @report.to_csv, filename: "slapafy_report_#{@report.id}.csv" }
+    end
   end
 
   def destroy
