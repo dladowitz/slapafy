@@ -26,27 +26,15 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
 
-
     # TODO create a class or helper for this
     # Get View Count and Channel ID
-    response = RestClient.get("https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=#{@video.youtube_id}&key=#{ENV["GOOGLE_API_KEY"]}")
+    response = RestClient.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=#{@video.youtube_id}&key=#{ENV["GOOGLE_API_KEY"]}")
     response = JSON.parse(response.body)
 
-    statistics = response["items"][0]["statistics"]
     snippet    = response["items"][0]["snippet"]
-
     title      = snippet["title"]
-    view_count = statistics["viewCount"]
-    channel_id = snippet["channelId"]
 
-    # Get Subscriber Count
-    response = RestClient.get("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=#{channel_id}&key=#{ENV["GOOGLE_API_KEY"]}")
-    response = JSON.parse(response.body)
-
-    statistics = response["items"][0]["statistics"]
-    subscribers = statistics["subscriberCount"]
-
-    @video.update_attributes views: view_count, channel_subscribers: subscribers, title: title
+    @video.update_attributes title: title
 
     respond_to do |format|
       if @video.save

@@ -1,2 +1,17 @@
-%h1 Reports#show
-%p Find me in app/views/reports/show.html.haml
+%h1= "Report ##{@report.id}"
+%h3= @report.created_at.localtime.to_formatted_s(:long)
+
+%table.table
+  %thead
+    %tr
+      %th YouTube ID
+      %th Views
+      %th Channel Subscribers
+      %th Video Title
+  %tbody
+    - @report.stats.each do |stat|
+      %tr
+        %td= stat.video.youtube_id
+        %td= stat.views
+        %td= stat.channel_subscribers
+        %td= stat.video.title
