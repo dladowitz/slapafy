@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  youtube_id: 
+  view: 
+  channel_subscribers: 
+
+two:
+  youtube_id: 
+  view: 
+  channel_subscribers: 

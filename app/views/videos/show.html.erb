@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Youtube:</strong>
+  <%= @video.youtube_id %>
+</p>
+
+<p>
+  <strong>View:</strong>
+  <%= @video.view %>
+</p>
+
+<p>
+  <strong>Channel subscribers:</strong>
+  <%= @video.channel_subscribers %>
+</p>
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>
