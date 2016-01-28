@@ -2,7 +2,7 @@
 
 <h1 class="m-b-2">Videos In System</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Youtube ID</th>
@@ -17,11 +17,8 @@
     <% @videos.each do |video| %>
       <tr>
         <td><%= link_to video.youtube_id, video, class: "m-r-1" %></td>
-        <!-- <td><%= video.views %></td>
-        <td><%= video.channel_subscribers %></td> -->
         <td><%= video.title %></td>
-        <!-- <td><%= link_to 'Edit', edit_video_path(video) %></td> -->
-        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger m-b-1 m-l-1" %></td>
+        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger m-l-1" %></td>
       </tr>
     <% end %>
   </tbody>

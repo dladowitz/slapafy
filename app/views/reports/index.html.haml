@@ -1,4 +1,7 @@
 %h1 Reports
+
+= button_to "Generate New Report", reports_path, method: :post, class: "btn btn-success m-y-1"
+
 %table.table
   %thead
     %tr
@@ -18,7 +21,7 @@
         %td= report.stats.count
         %td= button_to "Delete Report", report_path(report), method: :delete, class: "btn btn-sm btn-danger", :data => { :confirm => 'Are you like really really sure?' }
 
-= button_to "Generate New Report", reports_path, method: :post, class: "btn btn-success"
+%hr.m-t-3
 
 %h2.m-t-3 Videos
 = link_to "View Current Videos", videos_path, class: "btn btn-primary"
