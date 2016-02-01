@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root to: "welcome#landing"
 
+  get :oauthredirect,  to: "welcome#oauthredirect", as: :oauthredirect
+
   resources :welcome, only: [:landing]
+
   resources :reports
   resources :videos
   # The priority is based upon order of creation: first created -> highest priority.

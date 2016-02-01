@@ -17,3 +17,8 @@
 
 # Ignore application configuration
 /config/application.yml
+
+#Google API Keys
+/server.json
+/web.json
+/google-web.json
