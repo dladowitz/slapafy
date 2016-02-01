@@ -1,0 +1,15 @@
+%p#notice= notice
+%h1
+  = @video.title
+%p
+  %strong Youtube ID:
+  = @video.youtube_id
+%p
+  %strong YouTube URL:
+  = link_to "https://www.youtube.com/watch?v=#{@video.youtube_id}", "https://www.youtube.com/watch?v=#{@video.youtube_id}"
+
+%p
+  %strong Google Analytics Source /Medium:
+  = @video.ga_source_medium
+
+= link_to 'Back', videos_path, class: "btn btn-primary"

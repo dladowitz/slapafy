@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128071106) do
+ActiveRecord::Schema.define(version: 20160201070017) do
 
   create_table "reports", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(version: 20160128071106) do
 
   create_table "videos", force: :cascade do |t|
     t.string   "youtube_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "title"
+    t.string   "ga_source_medium"
   end
 
 end

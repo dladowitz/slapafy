@@ -1,3 +1,6 @@
+require 'google/apis/analytics_v3'
+require 'google/api_client/client_secrets'
+
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
 
@@ -15,6 +18,12 @@ class VideosController < ApplicationController
   # GET /videos/new
   def new
     @video = Video.new
+    client_opts = JSON.parse(session["google-auth-client"])
+    auth_client = Signet::OAuth2::Client.new(client_opts)
+
+    analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
+    results = analytics.get_ga_data('ga:103055258', '7daysAgo', 'yesterday', 'ga:sessions', dimensions: 'ga:sourceMedium', options:{ authorization: auth_client })
+    @video_names = results.rows.map{|source| source[0]}
   end
 
   # GET /videos/1/edit
@@ -79,6 +88,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:youtube_id, :views, :channel_subscribers, :title)
+      params.require(:video).permit(:youtube_id, :views, :channel_subscribers, :title, :ga_source_medium)
     end
 end

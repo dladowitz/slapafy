@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1.m-b-2 Videos In System
+%table.table
+  %thead
+    %tr
+      %th Youtube ID
+      %th Title
+      %th G.A. Source/Medium
+      %th{:colspan => "4"}
+  %tbody
+    - @videos.each do |video|
+      %tr
+        %td= link_to video.youtube_id, video, class: "m-r-1"
+        %td= video.title
+        %td= video.ga_source_medium
+        %td= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger m-l-1"
+%br/
+= link_to 'Add A Video', new_video_path, class: "btn btn-primary"

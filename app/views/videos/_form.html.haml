@@ -1,0 +1,20 @@
+= form_for(@video) do |f|
+  - if @video.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@video.errors.count, "error")
+        prohibited this video from being saved:
+      %ul
+        - @video.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :youtube_id, "YouTube Video ID"
+    %br/
+    = f.text_field :youtube_id
+
+  .field.m-t-2
+    = f.label "Google Analytics Source / Medium"
+    %br/
+    = f.select :ga_source_medium, options_for_select(@video_names)
+  .actions
+    = f.submit "Create Video", class: "btn btn-success m-t-1"
