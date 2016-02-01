@@ -2,3 +2,19 @@
 .col-sm-8.col-sm-offset-2.text-xs-center
   %h1.m-b-2 Manny's Happy Slappy Reports
   = image_tag "manny.jpg", id: "manny-image"
+
+%h1
+  Results
+
+%p
+  New Users:
+  = @results.totals_for_all_results["ga:newusers"]
+%p
+  Transactions:
+  = @results.totals_for_all_results["ga:transactions"]
+%p
+  Transaction Revenue:
+  = number_to_currency(@results.totals_for_all_results["ga:transactionRevenue"])
+%p
+  Goal 4 Completions:
+  = @results.totals_for_all_results["ga:goal4Completions"]
