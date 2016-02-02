@@ -83,6 +83,8 @@ class ReportsController < ApplicationController
     auth_client = Signet::OAuth2::Client.new(client_opts)
 
     analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
+
+    # TODO figure out how to handle timeout
     begin
       results = analytics.get_ga_data("ga:103055258", 
                                     "2015-05-29", 
