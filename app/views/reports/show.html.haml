@@ -23,10 +23,10 @@
         %td= link_to stat.video.title, stat.video
         %td= stat.video.ga_source_medium
         %td= stat.video.youtube_id
-        %td= stat.views
+        %td= number_with_delimiter(stat.views)
         %td= number_to_currency(stat.video.cost, precision: 0)
-        %td= stat.channel_subscribers
-        %td= stat.new_users
-        %td= stat.transactions
+        %td= number_with_delimiter(stat.channel_subscribers)
+        %td= number_with_delimiter(stat.new_users)
+        %td= number_with_delimiter(stat.transactions)
         %td= number_to_currency(stat.transaction_revenue, precision: 0)
-        %td= stat.goal_4_completions
+        %td= number_with_delimiter(stat.goal_4_completions)
