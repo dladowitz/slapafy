@@ -18,7 +18,7 @@ class WelcomeController < ApplicationController
     auth_client = client_secrets.to_authorization
     auth_client.update!(
       :scope => 'https://www.googleapis.com/auth/analytics.readonly',
-      :redirect_uri => 'http://localhost:3000/oauthredirect'
+      :redirect_uri => ENV["GOOGLE_API_REDIRECT_URI"]
     )
 
     if params["code"] 
