@@ -83,7 +83,8 @@ class ReportsController < ApplicationController
     auth_client = Signet::OAuth2::Client.new(client_opts)
 
     analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
-    results = analytics.get_ga_data("ga:103055258", 
+    begin
+      results = analytics.get_ga_data("ga:103055258", 
                                     "2015-05-29", 
                                     "yesterday", 
                                     "ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions", 
@@ -91,6 +92,10 @@ class ReportsController < ApplicationController
                                     filters: "ga:sourceMedium==#{video.ga_source_medium}", 
                                     options:{ authorization: auth_client }
                                     )
+    rescue Signet::AuthorizationError => e
+      return redirect_to "/oauthredirect"
+    end
+
     return results
   end
 end
