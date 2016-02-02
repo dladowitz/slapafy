@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
     client_secrets = Google::APIClient::ClientSecrets.new(JSON.parse(ENV['GOOGLE_CLIENT_SECRETS']))
     auth_client = client_secrets.to_authorization
     auth_client.update!(
-      :scope => 'https://www.googleapis.com/auth/analytics.readonly',
+      :scope => ['https://www.googleapis.com/auth/analytics.readonly','https://www.googleapis.com/auth/analytics'],
       :redirect_uri => ENV["GOOGLE_API_REDIRECT_URI"]
     )
 
