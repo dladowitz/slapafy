@@ -20,5 +20,5 @@
 
 #Google API Keys
 /server.json
-/web.json
+sub/web.json
 /google-web.json
