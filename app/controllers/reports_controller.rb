@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
     @current_videos.each do |video|
 
       youtube   = youtube_stats(video)
-      analytics = google_analytics_stats
+      analytics = google_analytics_stats(video)
 
       video.stats.create({report_id: @report.id, 
                           views: youtube[:view_count], 
@@ -78,12 +78,19 @@ class ReportsController < ApplicationController
   end
 
   # TODO move to a class
-  def google_analytics_stats
+  def google_analytics_stats(video)
     client_opts = JSON.parse(session["google-auth-client"])
     auth_client = Signet::OAuth2::Client.new(client_opts)
 
     analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
-    results = analytics.get_ga_data('ga:103055258', '7daysAgo', 'yesterday', 'ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions', dimensions: 'ga:source', filters: 'ga:source==CurlyByNature', options:{ authorization: auth_client })
+    results = analytics.get_ga_data("ga:103055258", 
+                                    "2015-05-29", 
+                                    "yesterday", 
+                                    "ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions", 
+                                    dimensions: "ga:sourceMedium", 
+                                    filters: "ga:sourceMedium==#{video.ga_source_medium}", 
+                                    options:{ authorization: auth_client }
+                                    )
     return results
   end
 end
