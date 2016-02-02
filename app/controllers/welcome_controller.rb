@@ -6,13 +6,9 @@ class WelcomeController < ApplicationController
   skip_before_action :authorize_ga_api, only: :oauthredirect
   
   def landing
-    client_opts = JSON.parse(session["google-auth-client"])
-    auth_client = Signet::OAuth2::Client.new(client_opts)
-
-    analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
-    @results = analytics.get_ga_data('ga:103055258', '7daysAgo', 'yesterday', 'ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions', dimensions: 'ga:source', filters: 'ga:source==CurlyByNature', options:{ authorization: auth_client })
   end
 
+  # TODO move to application controller
   def oauthredirect
     client_secrets = Google::APIClient::ClientSecrets.new(JSON.parse(ENV['GOOGLE_CLIENT_SECRETS']))
     auth_client = client_secrets.to_authorization

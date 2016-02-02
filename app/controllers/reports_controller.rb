@@ -40,6 +40,22 @@ class ReportsController < ApplicationController
 
   def create_stats
     @current_videos.each do |video|
+
+      youtube   = youtube_stats(video)
+      analytics = google_analytics_stats
+
+      video.stats.create({report_id: @report.id, 
+                          views: youtube[:view_count], 
+                          channel_subscribers: youtube[:subscriber_count], 
+                          new_users: analytics.totals_for_all_results["ga:newusers"],
+                          transactions: analytics.totals_for_all_results["ga:transactions"],
+                          transaction_revenue: analytics.totals_for_all_results["ga:transactionRevenue"],
+                          goal_4_completions: analytics.totals_for_all_results["ga:goal4Completions"]
+                        })
+    end
+  end
+
+  def youtube_stats(video)
       # Get Views & Channel Id
       response = RestClient.get("https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=#{video.youtube_id}&key=#{ENV["GOOGLE_API_KEY"]}")
       response = JSON.parse(response.body)
@@ -56,8 +72,18 @@ class ReportsController < ApplicationController
 
       statistics = response["items"][0]["statistics"]
       subscriber_count = statistics["subscriberCount"]
+      
+      results = {view_count: view_count, subscriber_count: subscriber_count}
+      return results
+  end
 
-      video.stats.create report_id: @report.id, views: view_count, channel_subscribers: subscriber_count
-    end
+  # TODO move to a class
+  def google_analytics_stats
+    client_opts = JSON.parse(session["google-auth-client"])
+    auth_client = Signet::OAuth2::Client.new(client_opts)
+
+    analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
+    results = analytics.get_ga_data('ga:103055258', '7daysAgo', 'yesterday', 'ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions', dimensions: 'ga:source', filters: 'ga:source==CurlyByNature', options:{ authorization: auth_client })
+    return results
   end
 end

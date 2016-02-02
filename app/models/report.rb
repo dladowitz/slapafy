@@ -14,9 +14,9 @@ class Report < ActiveRecord::Base
   # Instance Methods
   def to_csv
     CSV.generate do |csv|
-      csv << ["YouTube Id", "Views", "Channel Subscribers", "Video Title"]
+      csv << ["Video Title", "YouTube Id", "Views", "Channel Subscribers", "GA New Users", "GA Transactions", "GA Revenue", "GA Goal 4 Completions"]
       self.stats.each do |stat|
-        csv << [stat.video.youtube_id, stat.views, stat.channel_subscribers, stat.video.title]
+        csv << [stat.video.title, stat.video.youtube_id, stat.views, stat.channel_subscribers, stat.new_users, stat.transactions, stat.transaction_revenue, stat.goal_4_completions]
       end
     end
   end

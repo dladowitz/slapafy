@@ -6,15 +6,23 @@
 %table.table.m-t-2
   %thead
     %tr
+      %th Video Title
       %th YouTube ID
       %th Views
       %th Channel Subscribers
+      %th GA New Users
+      %th GA Transactions
+      %th GA Revenue
+      %th GA Goal 4 Completions
 
-      %th Video Title
   %tbody
     - @report.stats.each do |stat|
       %tr
+        %td= stat.video.title
         %td= stat.video.youtube_id
         %td= stat.views
         %td= stat.channel_subscribers
-        %td= stat.video.title
+        %td= stat.new_users
+        %td= stat.transactions
+        %td= stat.transaction_revenue
+        %td= stat.goal_4_completions
