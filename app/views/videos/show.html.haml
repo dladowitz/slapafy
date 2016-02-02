@@ -5,6 +5,9 @@
   %strong Youtube ID:
   = @video.youtube_id
 %p
+  %strong Cost:
+  = number_to_currency(@video.cost, precision: 0)
+%p
   %strong YouTube URL:
   = link_to "https://www.youtube.com/watch?v=#{@video.youtube_id}", "https://www.youtube.com/watch?v=#{@video.youtube_id}"
 

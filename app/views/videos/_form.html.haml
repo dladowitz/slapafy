@@ -11,6 +11,11 @@
     = f.label :youtube_id, "YouTube Video ID"
     %br/
     = f.text_field :youtube_id
+  
+  .field.m-t-2
+    = f.label :cost
+    %br/
+    = f.number_field :cost, step: 1
 
   .field.m-t-2
     = f.label "Google Analytics Source / Medium"

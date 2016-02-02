@@ -9,11 +9,12 @@
       %th Video Title
       %th YouTube ID
       %th Views
+      %th Cost
       %th Channel Subscribers
-      %th GA New Users
-      %th GA Transactions
-      %th GA Revenue
-      %th GA Goal 4 Completions
+      %th New Users
+      %th Transactions
+      %th Revenue
+      %th Goal 4 Completions
 
   %tbody
     - @report.stats.each do |stat|
@@ -21,8 +22,9 @@
         %td= stat.video.title
         %td= stat.video.youtube_id
         %td= stat.views
+        %td= number_to_currency(stat.video.cost, precision: 0)
         %td= stat.channel_subscribers
         %td= stat.new_users
         %td= stat.transactions
-        %td= stat.transaction_revenue
+        %td= number_to_currency(stat.transaction_revenue, precision: 0)
         %td= stat.goal_4_completions
