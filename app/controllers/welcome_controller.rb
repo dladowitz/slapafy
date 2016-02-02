@@ -26,7 +26,7 @@ class WelcomeController < ApplicationController
       auth_client.fetch_access_token!
       auth_client.client_secret = nil # not sure why this is
       session["google-auth-client"] = auth_client.to_json
-      return redirect_to root_path
+      return redirect_to root_url
     else
       google_auth_uri = auth_client.authorization_uri.to_s
       return redirect_to google_auth_uri
