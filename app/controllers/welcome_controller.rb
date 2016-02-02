@@ -3,8 +3,8 @@ require 'google/apis/analytics_v3'
 require 'google/api_client/client_secrets'
 
 class WelcomeController < ApplicationController
-  before_action :authorize_ga_api, except: :oauthredirect
-
+  skip_before_action :authorize_ga_api, only: :oauthredirect
+  
   def landing
     client_opts = JSON.parse(session["google-auth-client"])
     auth_client = Signet::OAuth2::Client.new(client_opts)
