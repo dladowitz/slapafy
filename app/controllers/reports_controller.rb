@@ -94,7 +94,8 @@ class ReportsController < ApplicationController
                                     filters: "ga:sourceMedium==#{video.ga_source_medium}", 
                                     options:{ authorization: auth_client }
                                     )
-    rescue Signet::AuthorizationError => e
+    rescue StandardError => e
+      puts e
       return redirect_to "/oauthredirect"
     end
 

@@ -26,7 +26,8 @@ class VideosController < ApplicationController
     # TODO figure out how to handle timeout
     begin
       results = analytics.get_ga_data('ga:103055258', '7daysAgo', 'yesterday', 'ga:sessions', dimensions: 'ga:sourceMedium', options:{ authorization: auth_client })
-    rescue Signet::AuthorizationError => e
+    rescue StandardError => e
+      puts e
       return redirect_to "/oauthredirect"
     end
 
