@@ -44,7 +44,8 @@ class ReportsController < ApplicationController
       youtube   = youtube_stats(video)
       analytics = google_analytics_stats(video)
 
-      if analytics.totals_for_all_results
+      puts "Analytics: #{analytics}"
+      if analytics
         video.stats.create({report_id: @report.id, 
                             views: youtube[:view_count], 
                             channel_subscribers: youtube[:subscriber_count], 
