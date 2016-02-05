@@ -20,6 +20,6 @@
   .field.m-t-2
     = f.label "Google Analytics Source / Medium"
     %br/
-    = f.select :ga_source_medium, options_for_select(@video_names)
+    = f.select :ga_source_medium, options_for_select(@video_names, :selected => f.object.ga_source_medium)
   .actions
     = f.submit "Create Video", class: "btn btn-success m-t-1"

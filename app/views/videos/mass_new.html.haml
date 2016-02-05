@@ -1,0 +1,23 @@
+%h1 Upload multiple videos here 
+%p.m-b-3 CSV File only - (YouTube-Id, Cost, Source / Medium)
+
+.well
+  = form_tag 'mass_create', :multipart => true do
+    %label{:for => "file"} Upload text File
+    = file_field_tag "file"
+    %br
+    = submit_tag "Upload CSV", class: "btn btn-success"
+ 
+
+/ .card
+/   %img.card-img-top{:alt => "Card image cap", "data-src" => "http://www.fillmurray.com/401/300"}/
+/   .card-block
+/     %h4.card-title Card title
+/     %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+/     %a.btn.btn-primary{:href => "#"} Button
+
+
+
+.m-t-3  
+= link_to 'Back', videos_path, class: "btn btn-primary m-t-1"
+

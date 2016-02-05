@@ -6,7 +6,14 @@ Rails.application.routes.draw do
   resources :welcome, only: [:landing]
 
   resources :reports
-  resources :videos
+  
+  resources :videos do 
+    collection do
+      get 'mass_new'
+      post 'mass_create'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

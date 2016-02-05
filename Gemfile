@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
@@ -25,6 +24,8 @@ gem 'sass-rails', '~> 5.0.0'
 gem 'simple_form'
 gem 'sprockets-rails'
 gem 'stripe'
+gem 'rails-assets-tether', '>= 1.1.0', source:'https://rails-assets.org'
+
 gem 'therubyracer', platforms: :ruby
 gem 'thin'
 gem 'validates_timeliness', github: 'razum2um/validates_timeliness', ref: 'b195081f6aeead619430ad38b0f0dfe4d4981252'

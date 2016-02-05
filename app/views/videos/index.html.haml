@@ -1,5 +1,7 @@
 %p#notice= notice
-%h1.m-b-2 Videos In System
+%h1.m-b-2 
+  Videos In System 
+  = link_to 'Add A Video', new_video_path, class: "btn btn-primary"
 %table.table
   %thead
     %tr
@@ -16,5 +18,3 @@
         %td= number_to_currency(video.cost, precision: 0)
         %td= video.ga_source_medium
         %td= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger m-l-1"
-%br/
-= link_to 'Add A Video', new_video_path, class: "btn btn-primary"
