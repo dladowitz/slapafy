@@ -44,6 +44,7 @@ class ReportsController < ApplicationController
       youtube   = youtube_stats(video)
       analytics = google_analytics_stats(video)
 
+      if analytics.totals_for_all_results do 
       video.stats.create({report_id: @report.id, 
                           views: youtube[:view_count], 
                           channel_subscribers: youtube[:subscriber_count], 
@@ -52,6 +53,9 @@ class ReportsController < ApplicationController
                           transaction_revenue: analytics.totals_for_all_results["ga:transactionRevenue"],
                           goal_4_completions: analytics.totals_for_all_results["ga:goal4Completions"]
                         })
+      else
+        return redirect_to "/oauthredirect"
+      end
     end
   end
 
@@ -95,7 +99,7 @@ class ReportsController < ApplicationController
                                     options:{ authorization: auth_client }
                                     )
     rescue StandardError => e
-      puts e
+      puts "Error Calling Google API for Analytics v3: #{e}"
       return redirect_to "/oauthredirect"
     end
 
