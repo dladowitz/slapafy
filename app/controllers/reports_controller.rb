@@ -16,6 +16,7 @@ class ReportsController < ApplicationController
 
     create_stats
 
+    # If @analytics is nill authorization has expired
     if @analytics
       render :show
     else
@@ -46,9 +47,9 @@ class ReportsController < ApplicationController
     @current_videos.each do |video|
 
       youtube   = youtube_stats(video)
-      analytics = google_analytics_stats(video)
+      @analytics = google_analytics_stats(video)
 
-      # puts "Analytics: #{analytics}"
+      # If authorization has expired this breaks
       if @analytics.try(:totals_for_all_results)
         video.stats.create({report_id: @report.id, 
                             views: youtube[:view_count], 
@@ -59,7 +60,7 @@ class ReportsController < ApplicationController
                             goal_4_completions: @analytics.totals_for_all_results["ga:goal4Completions"]
                           })
       else
-        puts "Analytics not found"
+        puts "Analytics not found. Setting up for redirect and reauthorization"
         @analytics = nil
       end
     end
@@ -106,6 +107,7 @@ class ReportsController < ApplicationController
                                     )
     rescue StandardError => e
       puts "Error Calling Google API for Analytics v3: #{e}"
+      # This would be the best place to redirect, but having a problem actually execution after redirect. 
       # return redirect_to "/oauthredirect"
     end
 
