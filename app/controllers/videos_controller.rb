@@ -1,6 +1,3 @@
-require 'google/apis/analytics_v3'
-require 'google/api_client/client_secrets'
-
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
 
