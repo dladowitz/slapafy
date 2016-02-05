@@ -9,9 +9,9 @@
       %th Video Title
       %th Source/Medium
       %th YouTube ID
+      %th Channel Subscribers
       %th Views
       %th Cost
-      %th Channel Subscribers
       %th New Users
       %th Transactions
       %th Revenue
@@ -23,9 +23,9 @@
         %td= link_to stat.video.title, stat.video
         %td= stat.video.ga_source_medium
         %td= stat.video.youtube_id
+        %td= number_with_delimiter(stat.channel_subscribers)
         %td= number_with_delimiter(stat.views)
         %td= number_to_currency(stat.video.cost, precision: 0)
-        %td= number_with_delimiter(stat.channel_subscribers)
         %td= number_with_delimiter(stat.new_users)
         %td= number_with_delimiter(stat.transactions)
         %td= number_to_currency(stat.transaction_revenue, precision: 0)
