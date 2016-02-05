@@ -44,6 +44,7 @@ class ReportsController < ApplicationController
   end
 
   def create_stats
+    # TODO This is a super slow way to populate. It's making two api calls for each video. Need to get all data at once.
     @current_videos.each do |video|
 
       youtube   = youtube_stats(video)
