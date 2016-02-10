@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authorize_ga_api
 
   def authorize_ga_api
-    return redirect_to "/oauthredirect" unless session["google-auth-client"]
+    return redirect_to "/oauthredirect" unless session["google-auth-client"] || ENV["RAILS_ENV"] == "test"
   end
 end

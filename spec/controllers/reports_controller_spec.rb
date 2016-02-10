@@ -1,33 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe ReportsController, :type => :controller do
 
+describe ReportsController do
   describe "GET index" do
-    it "returns http success" do
+    subject { get :index }
+
+    it "returns the index template" do
       get :index
-      expect(response).to be_success
+      expect(response).to render_template :index
     end
   end
-
-  describe "GET new" do
-    it "returns http success" do
-      get :new
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET create" do
-    it "returns http success" do
-      get :create
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET show" do
-    it "returns http success" do
-      get :show
-      expect(response).to be_success
-    end
-  end
-
 end
