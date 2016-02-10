@@ -51,4 +51,12 @@ class Stat < ActiveRecord::Base
       "---"
     end
   end
+
+  def cost_per_action
+    if video.cost > 0 && transactions > 0
+      (video.cost / transactions.to_f).round(0)
+    else
+      "---"
+    end
+  end
 end

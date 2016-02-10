@@ -46,7 +46,13 @@ describe Stat do
 
   it "correctly calculates cost_per_lead" do
     stat = create :stat
-    rpl = (stat.video.cost / stat.new_users.to_f).round(5)
-    expect(stat.cost_per_lead).to eq rpl
+    cpl = (stat.video.cost / stat.new_users.to_f).round(5)
+    expect(stat.cost_per_lead).to eq cpl
+  end
+
+  it "correctly calculates cost_per_action" do
+    stat = create :stat
+    cpa = (stat.video.cost / stat.transactions.to_f).round(0)
+    expect(stat.cost_per_action).to eq cpa
   end
 end
