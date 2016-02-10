@@ -14,9 +14,21 @@ describe Stat do
     expect(stat).to be_instance_of Stat
   end
 
-  it "correcty calculates video_roi" do
+  it "correctly calculates video_roi" do
     stat = create :stat
     roi = (stat.transaction_revenue/stat.video.cost.to_f).round(2)
     expect(stat.video_roi).to eq roi
+  end
+
+  it "correctly calculates cost_per_subscriber" do
+    stat = create :stat
+    cpsub = (stat.video.cost / stat.channel_subscribers.to_f).round(5)
+    expect(stat.cost_per_subscriber).to eq cpsub
+  end
+
+  it "correct calculates revenue_per_subscriber" do
+    stat = create :stat
+    rpsub = (stat.transaction_revenue / stat.channel_subscribers.to_f).round(5)
+    expect(stat.revenue_per_subscriber).to eq rpsub
   end
 end
