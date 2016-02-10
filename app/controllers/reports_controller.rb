@@ -52,9 +52,9 @@ class ReportsController < ApplicationController
 
       # If authorization has expired this breaks
       if @analytics.try(:totals_for_all_results)
-        video.stats.create({report_id: @report.id, 
-                            views: youtube[:view_count], 
-                            channel_subscribers: youtube[:subscriber_count], 
+        video.stats.create({report_id: @report.id,
+                            views: youtube[:view_count],
+                            channel_subscribers: youtube[:subscriber_count],
                             new_users: @analytics.totals_for_all_results["ga:newusers"],
                             transactions: @analytics.totals_for_all_results["ga:transactions"],
                             transaction_revenue: @analytics.totals_for_all_results["ga:transactionRevenue"],
@@ -84,7 +84,7 @@ class ReportsController < ApplicationController
 
       statistics = response["items"][0]["statistics"]
       subscriber_count = statistics["subscriberCount"]
-      
+
       results = {view_count: view_count, subscriber_count: subscriber_count}
       return results
   end
@@ -98,17 +98,17 @@ class ReportsController < ApplicationController
 
     # TODO figure out how to handle timeout
     begin
-      results = analytics.get_ga_data("ga:103055258", 
-                                    "2015-05-29", 
-                                    "yesterday", 
-                                    "ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions", 
-                                    dimensions: "ga:sourceMedium", 
-                                    filters: "ga:sourceMedium==#{video.ga_source_medium}", 
+      results = analytics.get_ga_data("ga:103055258",
+                                    "2015-05-29",
+                                    "yesterday",
+                                    "ga:newusers,ga:transactions,ga:transactionRevenue,ga:goal4Completions",
+                                    dimensions: "ga:sourceMedium",
+                                    filters: "ga:sourceMedium==#{video.ga_source_medium}",
                                     options:{ authorization: auth_client }
                                     )
     rescue StandardError => e
       puts "Error Calling Google API for Analytics v3: #{e}"
-      # This would be the best place to redirect, but having a problem actually execution after redirect. 
+      # This would be the best place to redirect, but having a problem actually execution after redirect.
       # return redirect_to "/oauthredirect"
     end
 

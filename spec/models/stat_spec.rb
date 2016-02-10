@@ -43,4 +43,10 @@ describe Stat do
     rpv = (stat.transaction_revenue / stat.views.to_f).round(5)
     expect(stat.revenue_per_view).to eq rpv
   end
+
+  it "correctly calculates cost_per_lead" do
+    stat = create :stat
+    rpl = (stat.video.cost / stat.new_users.to_f).round(5)
+    expect(stat.cost_per_lead).to eq rpl
+  end
 end

@@ -43,4 +43,12 @@ class Stat < ActiveRecord::Base
       "---"
     end
   end
+
+  def cost_per_lead
+    if video.cost > 0 && new_users > 0
+      (video.cost / new_users.to_f).round(2)
+    else
+      "---"
+    end
+  end
 end
