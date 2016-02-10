@@ -35,4 +35,12 @@ class Stat < ActiveRecord::Base
       "---"
     end
   end
+
+  def revenue_per_view
+    if transaction_revenue > 0 && views > 0
+      (transaction_revenue / views.to_f).round(5)
+    else
+      "---"
+    end
+  end
 end

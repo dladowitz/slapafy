@@ -37,4 +37,10 @@ describe Stat do
     cpv = (stat.video.cost / stat.views.to_f).round(5)
     expect(stat.cost_per_view).to eq cpv
   end
+
+  it "correctly calculates revenue_per_view" do
+    stat = create :stat
+    rpv = (stat.transaction_revenue / stat.views.to_f).round(5)
+    expect(stat.revenue_per_view).to eq rpv
+  end
 end
