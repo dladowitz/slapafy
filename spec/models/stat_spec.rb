@@ -26,9 +26,15 @@ describe Stat do
     expect(stat.cost_per_subscriber).to eq cpsub
   end
 
-  it "correct calculates revenue_per_subscriber" do
+  it "correctly calculates revenue_per_subscriber" do
     stat = create :stat
     rpsub = (stat.transaction_revenue / stat.channel_subscribers.to_f).round(5)
     expect(stat.revenue_per_subscriber).to eq rpsub
+  end
+
+  it "correctly calculates cost_per_view" do
+    stat = create :stat
+    cpv = (stat.video.cost / stat.views.to_f).round(5)
+    expect(stat.cost_per_view).to eq cpv
   end
 end

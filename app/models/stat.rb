@@ -27,4 +27,12 @@ class Stat < ActiveRecord::Base
       "---"
     end
   end
+
+  def cost_per_view
+    if video.cost > 0 && views > 0
+      (video.cost / views.to_f).round(5)
+    else
+      "---"
+    end
+  end
 end
