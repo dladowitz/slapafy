@@ -5,7 +5,7 @@ class Stat < ActiveRecord::Base
   validates :video_id, :report_id, :views, :channel_subscribers, :new_users, :transaction_revenue, :transactions, :goal_4_completions, presence: true
 
   def video_roi
-    if video.cost > 0 && transaction_revenue > 0
+    if transaction_revenue > 0 && video.cost > 0
       (transaction_revenue / video.cost.to_f).round(2)
     else
       "---"

@@ -3,6 +3,7 @@ class StatDecorator < Draper::Decorator
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
 
+  # TODO create specs for these
   def cost_per_lead
     if object.cost_per_lead.is_a? Float
       h.number_to_currency(object.cost_per_lead)
